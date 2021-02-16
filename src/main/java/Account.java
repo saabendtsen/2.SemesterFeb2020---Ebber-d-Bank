@@ -20,7 +20,4 @@ public class Account {
         return currentAmount;
     }
 
-    public void setCurrentAmount(int currentAmount) {
-        this.currentAmount = currentAmount;
-    }
 }
