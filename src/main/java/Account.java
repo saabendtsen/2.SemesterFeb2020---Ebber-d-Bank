@@ -3,7 +3,7 @@ public class Account {
     private int account_id;
     private double currentAmount;
 
-    public Account(int account_id, int currentAmount) {
+    public Account(int account_id, double currentAmount) {
         this.account_id = account_id;
         this.currentAmount = currentAmount;
     }
@@ -20,7 +20,4 @@ public class Account {
         return currentAmount;
     }
 
-    public void setCurrentAmount(double currentAmount) {
-        this.currentAmount = currentAmount;
-    }
 }
