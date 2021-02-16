@@ -5,7 +5,8 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
     Account account;
     TransaktionHandler th;
-    DBController dbc = new DBController();
+    Database database = new Database(Main.DBUSER,Main.DBPASS,Main.DBURL);
+    DBController dbc = new DBController(database);
 
     public void mainMenu() {
 
@@ -123,14 +124,13 @@ public class Menu {
                 System.out.println("hvilkent konto vil du hæve fra?");
                 int fromAccountID = Integer.parseInt(sc.nextLine());
                 //Det kommer fra databasen
-                Account fromAcount = new Account(fromAccountID,dbc.returnCurrentAccountAmount());
+                Account fromAcount = new Account(fromAccountID,dbc.returnCurrentAccountAmount(fromAccountID));
                 System.out.println("Hvilken konto skal modtage");
                 int toAccountID = Integer.parseInt(sc.nextLine());
-                Account toAccount = new Account(toAccountID, dbc.returnCurrentAccountAmount());
+                Account toAccount = new Account(toAccountID, dbc.returnCurrentAccountAmount(toAccountID));
                 System.out.println("Vælg beløb");
                 double amount = Double.parseDouble(sc.nextLine());
                 th.transferBetweenAccount(fromAcount,toAccount,amount);
-
 
             }
         }

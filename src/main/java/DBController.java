@@ -1,7 +1,6 @@
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 public class DBController {
 
@@ -12,8 +11,7 @@ public class DBController {
         this.database = database;
     }
 
-    public void getCustomerIdInfo (){
-        ArrayList<Costumer> costumers = new ArrayList<>();
+    public void getCustomersInfo (){
         String sql = "SELECT * FROM bank.customers";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
@@ -21,7 +19,7 @@ public class DBController {
                 int customer_id = rs.getInt("Customer_ID");
                 String customer_name = rs.getString("Customer_Name");
                 String customer_city = rs.getString("Customer_City");
-                /// TODO: 16-02-2021 do somthing with this info
+
                 System.out.println("Id: "+customer_id+ " Navn: "+customer_name+ " By: "+customer_city+"\n");
             }
         } catch (SQLException throwables) {
@@ -35,9 +33,13 @@ public class DBController {
             ResultSet rs = ps.executeQuery();
             while (rs.next()){
                 int customer_id = rs.getInt("Customer_ID");
-
+                // TODO: 16-02-2021 mangler
             }
         }
+    }
+
+    public void deleteCustomer() {
+        /// TODO: 16-02-2021 add
     }
 
     public void depositFromAccount(Account account, double amount) {
@@ -55,13 +57,12 @@ public class DBController {
     }
 
     public void withdrawFromAccount(Account account, double amount){
-
+        /// TODO: 16-02-2021 update from bank.transaction (Transaction_amount)
     }
 
     public void showAllTransactions(Account account){
         /// TODO: 16-02-2021 vis alle transaktioner der er på den pågældende konto
     }
-
 
 
     public double returnCurrentAccountAmount(int accountID){
@@ -77,7 +78,6 @@ public class DBController {
             throwables.printStackTrace();
         }
         return amount;
-        /// TODO: 16-02-2021 lægge alle transactions samme på account_id  som ligger på databasen, og print
     }
 
     public void updateAccount(Account account){
