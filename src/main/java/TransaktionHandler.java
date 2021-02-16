@@ -1,6 +1,6 @@
 public class TransaktionHandler {
 
-    Database db = new Database("root","1234","URL");
+    Database db = new Database(Main.DBUSER,Main.DBPASS,Main.DBURL);
     DBController dbc = new DBController(db);
 
 
@@ -27,7 +27,7 @@ public class TransaktionHandler {
         }
     }
 
-    public void showAllTransaktions(Account account){
-        dbc.showAllTransactions(account);
+    public void showAllTransactions(Account account){
+        dbc.showAllTransactions(account.getAccount_id());
     }
 }

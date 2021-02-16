@@ -1,20 +1,20 @@
 public class Customer {
 
-    private String customer_id;
+    private int customer_id;
     private String name;
     private String city;
 
-    public Customer(String customer_id, String name, String city) {
-        customer_id = customer_id;
+    public Customer(int customer_id, String name, String city) {
+        this.customer_id = customer_id;
         this.name = name;
         this.city = city;
     }
 
-    public String getCustomer_id() {
+    public int getCustomer_id() {
         return customer_id;
     }
 
-    public void setCustomer_id(String customer_id) {
+    public void setCustomer_id(int customer_id) {
         this.customer_id = customer_id;
     }
 
