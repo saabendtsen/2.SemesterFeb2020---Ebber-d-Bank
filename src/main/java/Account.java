@@ -1,7 +1,7 @@
 public class Account {
 
     private int account_id;
-    private int currentAmount;
+    private double currentAmount;
 
     public Account(int account_id, int currentAmount) {
         this.account_id = account_id;
@@ -16,11 +16,11 @@ public class Account {
         return account_id;
     }
 
-    public int getCurrentAmount() {
+    public double getCurrentAmount() {
         return currentAmount;
     }
 
-    public void setCurrentAmount(int currentAmount) {
+    public void setCurrentAmount(double currentAmount) {
         this.currentAmount = currentAmount;
     }
 }
