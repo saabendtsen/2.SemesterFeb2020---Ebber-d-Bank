@@ -3,7 +3,7 @@ import java.sql.*;
 public class DBController {
 
 
-    private Database database;
+    private final Database database;
 
     public DBController(Database database) {
         this.database = database;
