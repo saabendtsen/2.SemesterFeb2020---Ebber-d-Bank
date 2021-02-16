@@ -4,12 +4,12 @@ public class Transaction {
 
     private String account_id;
     private int amount;
-    LocalDateTime ldt;
+//    private LocalDateTime ldt;
 
-    public Transaction(String account_id, int amount, LocalDateTime ldt) {
+    public Transaction(String account_id, int amount) {
+//        this.ldt = LocalDateTime.now();
         this.account_id = account_id;
         this.amount = amount;
-        this.ldt = ldt;
     }
 
     public String getAccount_id() {
