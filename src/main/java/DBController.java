@@ -22,24 +22,24 @@ public class DBController {
 
     }
 
-    public depositFromAccount(Account account, double amount){
+    public void depositFromAccount(Account account, double amount){
         String sql = "SELECT * FROM bank.account";
 
     }
 
-    public withdrawFromAccount(Account account, double amount){
+    public void withdrawFromAccount(Account account, double amount){
 
     }
 
-    public showAllTransactions(Account account){
+    public void showAllTransactions(Account account){
         /// TODO: 16-02-2021 vis alle transaktioner der er på den pågældende konto
     }
 
-    public showAccountAmount(Account account){
+    public void showAccountAmount(Account account){
         /// TODO: 16-02-2021 hent nuværende amount som ligger på databasen, og print
     }
 
-    public updateAccount(Account account){
+    public void updateAccount(Account account){
 
     }
 

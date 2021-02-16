@@ -20,7 +20,7 @@ public class Transaction {
         this.account_id = account_id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
