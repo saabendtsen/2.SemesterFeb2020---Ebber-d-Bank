@@ -28,11 +28,4 @@ public class Transaction {
         this.amount = amount;
     }
 
-    public LocalDateTime getLdt() {
-        return ldt;
-    }
-
-    public void setLdt(LocalDateTime ldt) {
-        this.ldt = ldt;
-    }
 }
