@@ -42,7 +42,7 @@ public class DBController {
         /// TODO: 16-02-2021 add
     }
 
-    public void depositFromAccount(Account account, double amount) {
+    public boolean depositFromAccount(Account account, double amount) {
         boolean result = false;
         String sql = "insert into bank.transaction (Transaction_amount) values (?)";
             try (PreparedStatement ps = database.connect().prepareStatement(sql)) {
@@ -54,6 +54,8 @@ public class DBController {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+            return result;
+
     }
 
     public void withdrawFromAccount(Account account, double amount){

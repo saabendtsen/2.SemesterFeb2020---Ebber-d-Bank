@@ -6,8 +6,22 @@ public class Main {
     public static void main(String[] args) {
 
 
+
         Menu m = new Menu();
 
         m.mainMenu();
     }
+
+
+    // Deposit på account
+        /*
+        boolean result = DBController.depositFromAccount(account,amount);
+            if (result) {
+                System.out.println("Indsat "+amount+" på konto "+ account);
+            } else {
+                System.out.println(account+" Findes ikke!");
+            }
+         */
+
+
 }
