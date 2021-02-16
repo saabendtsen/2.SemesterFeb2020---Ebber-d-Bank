@@ -69,5 +69,9 @@ public class DBController {
 
     }
 
+    public double returnCurrentAccountAmount(){
+        return 0;
+    }
+
 
 }

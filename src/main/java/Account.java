@@ -1,9 +1,9 @@
 public class Account {
 
     private int account_id;
-    private int currentAmount;
+    private double currentAmount;
 
-    public Account(int account_id, int currentAmount) {
+    public Account(int account_id, double currentAmount) {
         this.account_id = account_id;
         this.currentAmount = currentAmount;
     }
@@ -16,7 +16,7 @@ public class Account {
         return account_id;
     }
 
-    public int getCurrentAmount() {
+    public double getCurrentAmount() {
         return currentAmount;
     }
 

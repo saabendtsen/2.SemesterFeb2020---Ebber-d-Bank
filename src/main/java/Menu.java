@@ -5,6 +5,7 @@ public class Menu {
     Scanner sc = new Scanner(System.in);
     Account account;
     TransaktionHandler th;
+    DBController dbc = new DBController();
 
     public void mainMenu() {
 
@@ -22,7 +23,7 @@ public class Menu {
             if (cmd.equals("1")) {
                 costumerLogInMenu();
             } else if (cmd.equals("2")) {
-                adminMenu();
+                adminLoginMenu();
             } else if (cmd.equals("q")) {
                 running = false;
             }
@@ -43,7 +44,7 @@ public class Menu {
                 int input = Integer.parseInt(sc.nextLine());
 //                System.out.println("Indtast dit kodeord og afslut med enter: ");
 //                cmd1 = sc.nextLine();
-                //TODO: This comes from the databases
+                //TODO: Check account ID in database, This comes from the databases
                 Account acc = new Account(input, 120);
                 costumerMenu(acc);
             } else if(cmd.equals("2")){
@@ -70,10 +71,15 @@ public class Menu {
                 th.deposit(account_id, input);
                 System.out.println("Din nye er saldo er nu: " + account.getCurrentAmount());
             }
+            if (cmd.equals("2")){
+                System.out.println("Indtast beløb du vil du hæve");
+                double input = Double.parseDouble(sc.nextLine());
+                th.withdraw(account_id,input);
+            }
         }
     }
 
-    public void adminMenu(){
+    public void adminLoginMenu(){
         boolean running = true;
         System.out.println("Du har valgt at logge ind som admin");
         System.out.println("Tryk 1) for at logge ind");
@@ -92,5 +98,42 @@ public class Menu {
                 running = false;
             }
         }
+    }
+
+    public void adminMenu(){
+        boolean running = true;
+
+        System.out.println("Velkommen til Admin menu, hvad vil du foretage dig?");
+        System.out.println("Tryk 1) for at administrere en kunde");
+        System.out.println("Tryk 2) for at flytte midler mellem to kunder");
+
+        String cmd = sc.nextLine();
+
+        while(running) {
+            if (cmd.equals("1")) {
+                //dbc.showAllAccounts
+                System.out.println("Vælg en konto at administrere");
+                double input = Double.parseDouble(sc.nextLine());
+
+                //TODO hent account data fra DB
+                //costumerMenu(det valgte account);
+
+            }
+            if (cmd.equals("2")) {
+                System.out.println("hvilkent konto vil du hæve fra?");
+                int fromAccountID = Integer.parseInt(sc.nextLine());
+                //Det kommer fra databasen
+                Account fromAcount = new Account(fromAccountID,dbc.returnCurrentAccountAmount());
+                System.out.println("Hvilken konto skal modtage");
+                int toAccountID = Integer.parseInt(sc.nextLine());
+                Account toAccount = new Account(toAccountID, dbc.returnCurrentAccountAmount());
+                System.out.println("Vælg beløb");
+                double amount = Double.parseDouble(sc.nextLine());
+                th.transferBetweenAccount(fromAcount,toAccount,amount);
+
+
+            }
+        }
+
     }
 }
