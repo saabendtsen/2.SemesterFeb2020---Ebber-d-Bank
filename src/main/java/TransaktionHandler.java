@@ -7,9 +7,10 @@ public class TransaktionHandler {
     public void deposit(Account account, double amount){
 
 
+        Transaction t = new Transaction(account.getAccount_id(), amount);
+
+
         account.updateAccountAmount();
-
-
 
     }
 

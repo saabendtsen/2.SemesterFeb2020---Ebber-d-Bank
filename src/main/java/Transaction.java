@@ -3,7 +3,7 @@ import java.time.LocalDateTime;
 public class Transaction {
 
     private String account_id;
-    private int amount;
+    private double amount;
 //    private LocalDateTime ldt;
 
     public Transaction(String account_id, int amount) {
