@@ -10,7 +10,6 @@ public class Account {
 
     public void updateAccountAmount(){
         // TODO: Make the code.
-
     }
 
     public int getAccount_id() {
