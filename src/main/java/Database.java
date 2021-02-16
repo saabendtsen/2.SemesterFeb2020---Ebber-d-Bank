@@ -16,7 +16,7 @@ public class Database {
         this.URL = URL;
 
         try {
-            Class.forName("com.mysql.cj.jbdc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             System.out.println("Error! Can't instantiate SQL Driver class");
