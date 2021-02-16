@@ -1,23 +1,22 @@
 public class Account {
 
-    private String account_id;
+    private int account_id;
     private int currentAmount;
 
-    public Account(String account_id, int currentAmount) {
+    public Account(int account_id, int currentAmount) {
         this.account_id = account_id;
         this.currentAmount = currentAmount;
     }
 
     public void updateAccountAmount(){
         // TODO: Make the code.
-
     }
 
-    public String getAccount_id() {
+    public int getAccount_id() {
         return account_id;
     }
 
-    public void setAccount_id(String account_id) {
+    public void setAccount_id(int account_id) {
         this.account_id = account_id;
     }
 
