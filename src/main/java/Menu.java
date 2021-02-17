@@ -125,16 +125,15 @@ public class Menu {
                 dbc.getCustomersInfo();
                 System.out.println("hvilkent konto vil du hæve fra?");
                 int fromAccountID = Integer.parseInt(sc.nextLine());
-                Account fromAcount = new Account(fromAccountID,dbc.returnCurrentAccountAmount(fromAccountID));
+
 
                 dbc.getCustomersInfo();
                 System.out.println("Hvilken konto skal modtage");
                 int toAccountID = Integer.parseInt(sc.nextLine());
-                Account toAccount = new Account(toAccountID, dbc.returnCurrentAccountAmount(toAccountID));
 
                 System.out.println("Vælg beløb");
                 double amount = Double.parseDouble(sc.nextLine());
-                th.transferBetweenAccount(fromAcount,toAccount,amount);
+                th.transferBetweenAccount(fromAccountID,toAccountID,amount);
             }else if (cmd.equals("q")){
                 running = false;
             }
