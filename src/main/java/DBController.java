@@ -40,16 +40,12 @@ public class DBController {
                 String customerName = rs.getString("Customer_Name");
                 int amount = rs.getInt("Amount");
                 text.append("Kunde nr: ").append(customerId).append(" Konto nr: ").append(accountId).append(" Kunde navn: ").append(customerName).append(" Saldo: ").append(amount).append("\n");
-                System.out.println(text);
-            }
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected == 1) {
                 result = true;
             }
-
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println(text);
         return result;
     }
 
