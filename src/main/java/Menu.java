@@ -117,27 +117,43 @@ public class Menu {
         while(running) {
             if (cmd.equals("1")) {
                 dbc.getCustomersInfo();
-                System.out.println("Vælg en konto at administrere");
+                System.out.println("Vælg en kunde at administrer");
                 int input = Integer.parseInt(sc.nextLine());
-                dbc.getAccountDetails(input);
-                costumerLogInMenu();
+                if(dbc.getAccountDetails(input)) {
+                    System.out.println("Vælg hvilken konto du vil administrer");
+                    input = Integer.parseInt(sc.nextLine());
+                    costumerMenu(input);
+                }else {
+                    System.out.println("Hov hov du, tast lige rigtigt");
+                }
+
             }else if (cmd.equals("2")) {
+                int fromAccountID;
+                int toAccountID;
                 dbc.getCustomersInfo();
                 System.out.println("hvilkent konto vil du hæve fra?");
-                int fromAccountID = Integer.parseInt(sc.nextLine());
+                int input = Integer.parseInt(sc.nextLine());
+                if(dbc.getAccountDetails(input)){
+                    System.out.println("Hvilken konto vil du hæve penge fra");
+                    fromAccountID = Integer.parseInt(sc.nextLine());
 
-
-                dbc.getCustomersInfo();
-                System.out.println("Hvilken konto skal modtage");
-                int toAccountID = Integer.parseInt(sc.nextLine());
-
-                System.out.println("Vælg beløb");
-                double amount = Double.parseDouble(sc.nextLine());
-                th.transferBetweenAccount(fromAccountID,toAccountID,amount);
+                    dbc.getCustomersInfo();
+                    System.out.println("Hvilken konto skal modtage");
+                    input = Integer.parseInt(sc.nextLine());
+                    if(dbc.getAccountDetails(input)){
+                        toAccountID = Integer.parseInt(sc.nextLine());
+                        System.out.println("Vælg beløb");
+                        double amount = Double.parseDouble(sc.nextLine());
+                        th.transferBetweenAccount(fromAccountID,toAccountID,amount);
+                    }else {
+                        System.out.println("Noget gik galt");
+                    }
+                }else {
+                    System.out.println("Noget gik galt manner");
+                }
             }else if (cmd.equals("q")){
                 running = false;
             }
         }
-
     }
 }
