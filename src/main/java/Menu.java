@@ -43,7 +43,7 @@ public class Menu {
             if(cmd.equals("1")){
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
                 int input = Integer.parseInt(sc.nextLine());
-               if(dbc.getAccountDetails(input)){
+               if(dbc.getCustomerAccountDetails(input)){
                    System.out.println("Hvilken konto vil du gerne administrer");
                    int input1 = Integer.parseInt(sc.nextLine());
                    costumerMenu(input1);
@@ -130,7 +130,7 @@ public class Menu {
                 dbc.getCustomersInfo();
                 System.out.println("Vælg en kunde at administrer");
                 int input = Integer.parseInt(sc.nextLine());
-                if(dbc.getAccountDetails(input)) {
+                if(dbc.getCustomerAccountDetails(input)) {
                     System.out.println("Vælg hvilken konto du vil administrer");
                     input = Integer.parseInt(sc.nextLine());
                     costumerMenu(input);
@@ -144,14 +144,14 @@ public class Menu {
                 dbc.getCustomersInfo();
                 System.out.println("hvilkent konto vil du hæve fra?");
                 int input = Integer.parseInt(sc.nextLine());
-                if(dbc.getAccountDetails(input)){
+                if(dbc.getCustomerAccountDetails(input)){
                     System.out.println("Hvilken konto vil du hæve penge fra");
                     fromAccountID = Integer.parseInt(sc.nextLine());
 
                     dbc.getCustomersInfo();
                     System.out.println("Hvilken konto skal modtage");
                     input = Integer.parseInt(sc.nextLine());
-                    if(dbc.getAccountDetails(input)){
+                    if(dbc.getCustomerAccountDetails(input)){
                         toAccountID = Integer.parseInt(sc.nextLine());
                         System.out.println("Vælg beløb");
                         double amount = Double.parseDouble(sc.nextLine());
