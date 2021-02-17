@@ -51,22 +51,23 @@ public class DBController {
         return result;
     }
 
-    public boolean createCustomer(Customer customer) {
-        boolean result = false;
-        String sql = "insert into bank.customers (Customer_ID,Customer_Name,Customer_City) values (?,?,?)";
-        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
-            ps.setInt(1, customer.getCustomer_id());
-            ps.setString(2,customer.getName());
-            ps.setString(3,customer.getCity());
-            createAccount(customer.getCustomer_id());
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected == 1) {
-                result = true;
+    public int createCustomer(String name, String city) {
+        int customerId = 0;
+        String sql = "insert into bank.customers (Customer_Name,Customer_City) values (?,?)";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS)){
+            ps.setString(1,name);
+            ps.setString(2,city);
+            ps.executeUpdate();
+            try (ResultSet rs = ps.getGeneratedKeys()){
+                if (rs.next()) {
+                    customerId = rs.getInt(1);
+                    createAccount(customerId);
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return result;
+        return customerId;
     }
 
     public boolean createAccount(int customerID){

@@ -178,10 +178,10 @@ public class Menu {
         System.out.println("indtast kundens by");
         String customer_city = sc.nextLine();
         Customer newCustomer = new Customer(0,customer_name,customer_city);
-        boolean result = dbc.createCustomer(newCustomer);
-        if (result){
-            System.out.println("Du har nu oprettet en ny bruger");
-            adminMenu();
+        int result = dbc.createCustomer(customer_name,customer_city);
+        if (result != 0){
+            System.out.println("Kunde nr "+result+" er nu blevet tilføjet til DB");
+
         } else {
             System.out.println("Kunde kunne ikke tilføjes! Kunde ID "+" bruges allerede!");
         }
