@@ -20,10 +20,10 @@ public class TransaktionHandler {
         }
     }
 
-    public void transferBetweenAccount(Account fromAccount, Account toAccount, double amount){
-        if(fromAccount.getCurrentAmount() > amount) {
-            withdraw(fromAccount.getAccount_id(), amount);
-            deposit(toAccount.getAccount_id(), amount);
+    public void transferBetweenAccount(int fromAccount, int toAccount, double amount){
+        if(fromAccount > amount) {
+            withdraw(fromAccount, amount);
+            deposit(toAccount, amount);
         }
     }
 
