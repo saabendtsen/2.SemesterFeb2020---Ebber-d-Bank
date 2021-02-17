@@ -25,7 +25,7 @@ public class DBController {
     public boolean getAccountDetails(int customerID){
         boolean result = false;
         StringBuilder text = new StringBuilder();
-        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name\n" +
                 "FROM customers\n" +
                 "INNER JOIN account ON account.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
@@ -80,11 +80,27 @@ public class DBController {
         return result;
     }
 
-    public boolean deleteCustomer(int accountID) {
+    public boolean deleteCustomer(int customerID) {
         boolean result = false;
         String sql = "delete from bank.customers where Customer_ID = ?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
-            ps.setInt(1, accountID);
+            ps.setInt(1, customerID);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 1) {
+                result = true;
+                deleteAllAccounts(customerID);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean deleteAllAccounts(int customerID) {
+        boolean result = false;
+        String sql = "delete from bank.account where Customer_ID = ?";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+            ps.setInt(1, customerID);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 1) {
                 result = true;
