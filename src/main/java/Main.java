@@ -1,3 +1,5 @@
+import javax.xml.crypto.Data;
+
 public class Main {
     // Database info
     static final String DBURL = "jdbc:mysql://localhost:3306/bank?serverTimezone=UTC";
@@ -6,9 +8,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Menu m = new Menu();
-
-        m.mainMenu();
+//        Menu m = new Menu();
+//
+//        m.mainMenu();
     }
 
 
