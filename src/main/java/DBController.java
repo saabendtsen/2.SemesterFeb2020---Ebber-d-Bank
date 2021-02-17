@@ -8,18 +8,23 @@ public class DBController {
     }
 
     public void getCustomersInfo (){
-        String sql = "SELECT * FROM bank.customers";
+        StringBuilder text = new StringBuilder();
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
+                "FROM customers\n" +
+                "INNER JOIN account ON account.Customer_ID=customers.Customer_ID";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                int account_id = rs.getInt("Account_ID");
                 int customer_id = rs.getInt("Customer_ID");
                 String customer_name = rs.getString("Customer_Name");
                 String customer_city = rs.getString("Customer_City");
-                System.out.println("Id: "+customer_id+ " Navn: "+customer_name+ " By: "+customer_city+"\n");
+                text.append("Konto Id: ").append(account_id).append(" - Kunde Id: ").append(customer_id).append(" - Navn: ").append(customer_name).append(" - By: ").append(customer_city).append("\n");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println(text);
     }
 
     public boolean getAccountDetails(int customerID){

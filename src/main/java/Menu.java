@@ -98,7 +98,6 @@ public class Menu {
         System.out.println("Du har valgt at logge ind som admin");
         System.out.println("Tryk 1) for at logge ind");
         System.out.println("Tryk 2) for at gå tilbage");
-
         String cmd = sc.nextLine();
 
         while(running){
@@ -108,7 +107,7 @@ public class Menu {
                 adminMenu();
             }else if(cmd.equals("2")) {
                 running = false;
-            } else {
+            }else {
                 System.out.println("Hov hov du! Indtast rigtig input (adminLoginMenu)");
             }
         }
@@ -121,6 +120,7 @@ public class Menu {
         System.out.println("Tryk 1) for at administrere en kunde");
         System.out.println("Tryk 2) for at flytte midler mellem to kunder");
         System.out.println("Tryk 3) for at oprette en ny kunde");
+        System.out.println("Tryk 4) test af transaktioner");
         System.out.println("Eller tryk 'q' for at lukke ud!");
 
         String cmd = sc.nextLine();
@@ -164,7 +164,13 @@ public class Menu {
                 }
             }else if (cmd.equals("3")) {
                 adduser();
-            }else if (cmd.equals("q")){
+            }else if (cmd.equals("4")){
+                System.out.println("Indtast den konto du vil se alle transaktioner på!");
+                dbc.getCustomersInfo();
+                int input = Integer.parseInt(sc.nextLine());
+                System.out.println(dbc.showAllTransactions(input));
+                running = false;
+            } else if (cmd.equals("q")){
                 running = false;
             }
         }
