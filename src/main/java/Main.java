@@ -5,6 +5,10 @@ public class Main {
     static final String DBPASS = "1234";
 
     public static void main(String[] args) {
+        Database d = new Database(DBUSER,DBPASS,DBURL);
+        DBController b = new DBController(d);
+
+        System.out.println(b.getAccountDetails(1));
 
 
         Menu m = new Menu();
