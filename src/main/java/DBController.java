@@ -29,7 +29,6 @@ public class DBController {
     }
 
     public boolean getAccountDetails(int customerID){
-
         boolean result = false;
         StringBuilder text = new StringBuilder();
         String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
