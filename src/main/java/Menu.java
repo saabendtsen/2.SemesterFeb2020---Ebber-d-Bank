@@ -4,7 +4,7 @@ public class Menu {
 
     Scanner sc = new Scanner(System.in);
     Account account;
-    TransaktionHandler th;
+    TransaktionHandler th = new TransaktionHandler();
     Database database = new Database(Main.DBUSER,Main.DBPASS,Main.DBURL);
     DBController dbc = new DBController(database);
 
@@ -42,7 +42,7 @@ public class Menu {
             if(cmd.equals("1")){
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
                 int input = Integer.parseInt(sc.nextLine());
-
+                running = false;
                if(dbc.getAccountDetails(input)){
                    System.out.println("Hvilken konto vil du gerne administrer");
                    int input1 = Integer.parseInt(sc.nextLine());
@@ -51,6 +51,9 @@ public class Menu {
 
             } else if(cmd.equals("2")){
                 running = false;
+            } else {
+                System.out.println("Du har indtastet forkert prøv igen");
+                costumerLogInMenu();
             }
         }
     }
@@ -72,10 +75,13 @@ public class Menu {
                 double input = Double.parseDouble(sc.nextLine());
                 th.deposit(i, input);
                 System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
+                running = false;
             }else if (cmd.equals("2")){
                 System.out.println("Indtast beløb du gerne vil hæve på din konto");
                 double input = Double.parseDouble(sc.nextLine());
                 th.withdraw(i,input);
+                System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
+                running = false;
             }else if (cmd.equals("3")){
                 running = false;
             }

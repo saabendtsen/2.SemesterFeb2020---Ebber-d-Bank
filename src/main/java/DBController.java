@@ -1,9 +1,13 @@
 import java.sql.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class DBController {
 
 
     private final Database database;
+    private final LocalDateTime ldt = LocalDateTime.now();
+    String formattedTime = ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
     public DBController(Database database) {
         this.database = database;
@@ -28,7 +32,7 @@ public class DBController {
 
         boolean result = false;
         StringBuilder text = new StringBuilder();
-        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City, account.Amount\n" +
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
                 "FROM customers\n" +
                 "INNER JOIN account ON account.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
@@ -38,8 +42,7 @@ public class DBController {
                 int customerId = rs.getInt("Customer_ID");
                 int accountId = rs.getInt("Account_ID");
                 String customerName = rs.getString("Customer_Name");
-                int amount = rs.getInt("Amount");
-                text.append("Kunde nr: ").append(customerId).append(" Konto nr: ").append(accountId).append(" Kunde navn: ").append(customerName).append(" Saldo: ").append(amount).append("\n");
+                text.append("Kunde nr: ").append(customerId).append(" Konto nr: ").append(accountId).append(" Kunde navn: ").append(customerName).append(" Saldo: ").append(returnCurrentAccountAmount(accountId)).append("\n");
                 result = true;
             }
         } catch (SQLException throwables) {
@@ -83,9 +86,11 @@ public class DBController {
 
     public boolean depositFromAccount(int account_id, double amount) {
         boolean result = false;
-        String sql = "insert into bank.transaction (Transaction_amount) values (?)";
+        String sql = "insert into bank.transaction (Transaction_ID, Transaction_amount, Transaction_date, Account_ID) values (?,?,now(),?)";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)) {
-            ps.setDouble(3, amount);
+            ps.setInt(1, 0);
+            ps.setDouble(2, amount);
+            ps.setInt(3, account_id);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 1) {
                 result = true;
