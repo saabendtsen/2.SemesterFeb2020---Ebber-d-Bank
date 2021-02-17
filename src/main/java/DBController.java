@@ -24,15 +24,32 @@ public class DBController {
         }
     }
 
-    public String getAccountDetails(int customerID){
+    public boolean getAccountDetails(int customerID){
+        boolean result = false;
+        StringBuilder text = new StringBuilder();
         String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City, account.Amount\n" +
                 "FROM customers\n" +
-                "INNER JOIN account ON customers.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
+                "INNER JOIN account ON account.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+            ps.setInt(1,customerID);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                int customerId = rs.getInt("Customer_ID");
+                int accountId = rs.getInt("Account_ID");
+                String customerName = rs.getString("Customer_Name");
+                int amount = rs.getInt("Amount");
+                text.append("Kunde nr: ").append(customerId).append(" Konto nr: ").append(accountId).append(" Kunde navn: ").append(customerName).append(" Saldo: ").append(amount).append("\n");
+                System.out.println(text);
+            }
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 1) {
+                result = true;
+            }
 
-
-
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
         }
+        return result;
     }
 
     public boolean createCustomer(Customer customer) {
