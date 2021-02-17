@@ -24,6 +24,17 @@ public class DBController {
         }
     }
 
+    public String getAccountDetails(int customerID){
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City, account.Amount\n" +
+                "FROM customers\n" +
+                "INNER JOIN account ON customers.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+
+
+
+        }
+    }
+
     public boolean createCustomer(Customer customer) {
         boolean result = false;
         String sql = "insert into bank.customers (Customer_ID,Customer_Name,Customer_City) values (?,?,?)";
