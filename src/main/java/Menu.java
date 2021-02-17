@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -27,6 +28,8 @@ public class Menu {
                 adminLoginMenu();
             } else if (cmd.equals("q")) {
                 running = false;
+            }else {
+                System.out.println("Indtast et korrekt input (mainMenu)");
             }
         }
     }
@@ -48,7 +51,6 @@ public class Menu {
                    int input1 = Integer.parseInt(sc.nextLine());
                    costumerMenu(input1);
                }
-
             } else if(cmd.equals("2")){
                 running = false;
             } else {
@@ -87,6 +89,8 @@ public class Menu {
             }
             else if(cmd.equals("q")){
                 running = false;
+            }else {
+                System.out.println("Indtast et korrekt input (costumerMenu)");
             }
         }
     }
@@ -106,6 +110,8 @@ public class Menu {
                 adminMenu();
             }else if(cmd.equals("2")) {
                 running = false;
+            } else {
+                System.out.println("Hov hov du! Indtast rigtig input (adminLoginMenu)");
             }
         }
     }
@@ -130,7 +136,7 @@ public class Menu {
                     input = Integer.parseInt(sc.nextLine());
                     costumerMenu(input);
                 }else {
-                    System.out.println("Hov hov du, tast lige rigtigt");
+                    System.out.println("Hov hov du, tast lige rigtigt (adminMenu)");
                 }
 
             }else if (cmd.equals("2")) {
