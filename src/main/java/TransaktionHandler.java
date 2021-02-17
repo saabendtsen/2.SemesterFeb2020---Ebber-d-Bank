@@ -7,14 +7,14 @@ public class TransaktionHandler {
 
     public void deposit(int account_id, double amount){
         if (amount > 0) {
-            dbc.depositFromAccount(account_id, amount);
+            dbc.transferFromToAccount(account_id, amount);
         }
     }
 
     public void withdraw(int account_id, double amount){
 
         if(dbc.returnCurrentAccountAmount(account_id) > amount){
-        dbc.depositFromAccount(account_id,-amount);
+        dbc.transferFromToAccount(account_id,-amount);
         } else {
             System.out.println("Der er ikke nok penge på din konto. Dit fattige svin");
         }

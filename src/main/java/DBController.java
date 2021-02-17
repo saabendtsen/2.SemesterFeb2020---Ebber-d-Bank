@@ -84,7 +84,7 @@ public class DBController {
         return result;
     }
 
-    public boolean depositFromAccount(int account_id, double amount) {
+    public boolean transferFromToAccount(int account_id, double amount) {
         boolean result = false;
         String sql = "insert into bank.transaction (Transaction_ID, Transaction_amount, Transaction_date, Account_ID) values (?,?,now(),?)";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)) {
@@ -101,21 +101,6 @@ public class DBController {
         return result;
     }
 
-    public boolean withdrawFromAccount(int account_id, double amount){
-        /// TODO: 16-02-2021 18:00 mangler stadig
-        boolean result = false;
-        String sql = "insert into bank.transaction (Transaction_amount) values (?)";
-        try (PreparedStatement ps = database.connect().prepareStatement(sql)) {
-            ps.setDouble(3, amount);
-            int rowsAffected = ps.executeUpdate();
-            if (rowsAffected == 1) {
-                result = true;
-            }
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        return result;
-    }
 
     public String showAllTransactions(int accountID){
         StringBuilder result = new StringBuilder();
