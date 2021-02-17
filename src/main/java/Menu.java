@@ -121,7 +121,7 @@ public class Menu {
         System.out.println("Tryk 2) for at flytte midler mellem to kunder");
         System.out.println("Tryk 3) for at oprette en ny kunde");
         System.out.println("Tryk 4) test af transaktioner");
-        System.out.println("Eller tryk 'q' for at lukke ud!");
+        System.out.println("Eller tryk 'q' for at logge ud!");
 
         String cmd = sc.nextLine();
 
@@ -167,6 +167,7 @@ public class Menu {
                     System.out.println("Noget gik galt manner");
                 }
             } else if (cmd.equals("3")) {
+                running = false;
                 adduser();
             } else if (cmd.equals("4")) {
                 System.out.println("Indtast den konto du vil se alle transaktioner på!");
@@ -182,17 +183,21 @@ public class Menu {
     }
 
     public void adduser() {
-        System.out.println("---Indsæt ny kunde---");
-        System.out.println("indtast kunder navn");
-        String customer_name = sc.nextLine();
-        System.out.println("indtast kundens by");
-        String customer_city = sc.nextLine();
-        int result = dbc.createCustomer(customer_name, customer_city);
-        if (result != 0) {
-            System.out.println("Kunde nr " + result + " er nu blevet tilføjet til DB");
-            adminMenu();
-        } else {
-            System.out.println("Kunde kunne ikke tilføjes! Kunde ID: " + result + " bruges allerede!");
+        boolean running = true;
+        while(running) {
+            System.out.println("---Indsæt ny kunde---");
+            System.out.println("indtast kunder navn");
+            String customer_name = sc.nextLine();
+            System.out.println("indtast kundens by");
+            String customer_city = sc.nextLine();
+            int result = dbc.createCustomer(customer_name, customer_city);
+            if (result != 0) {
+                System.out.println("Kunde nr " + result + " er nu blevet tilføjet til DB");
+                running = false;
+                adminMenu();
+            } else {
+                System.out.println("Kunde kunne ikke tilføjes! Kunde ID: " + result + " bruges allerede!");
+            }
         }
     }
 
