@@ -1,4 +1,3 @@
-import java.sql.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -180,7 +179,7 @@ public class Menu {
         int result = dbc.createCustomer(customer_name,customer_city);
         if (result != 0){
             System.out.println("Kunde nr "+result+" er nu blevet tilføjet til DB");
-
+            adminMenu();
         } else {
             System.out.println("Kunde kunne ikke tilføjes! Kunde ID: "+result+" bruges allerede!");
         }
