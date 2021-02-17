@@ -1,3 +1,4 @@
+import java.sql.Date;
 import java.util.Scanner;
 
 public class Menu {
@@ -79,6 +80,7 @@ public class Menu {
                 System.out.println("Indtast beløb du gerne vil hæve på din konto");
                 double input = Double.parseDouble(sc.nextLine());
                 th.withdraw(i,input);
+                System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
             }else if (cmd.equals("3")){
                 running = false;
             }
