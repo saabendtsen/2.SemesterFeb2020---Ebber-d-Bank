@@ -43,37 +43,39 @@ public class Menu {
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
                 int input = Integer.parseInt(sc.nextLine());
 
-                //TODO: Check account ID in database, This comes from the databases
-                Account acc = new Account(input, 120);
-                costumerMenu(acc);
+               if(dbc.getAccountDetails(input)){
+                   System.out.println("Hvilken konto vil du gerne administrer");
+                   int input1 = Integer.parseInt(sc.nextLine());
+                   costumerMenu(input1);
+               }
+
             } else if(cmd.equals("2")){
                 running = false;
             }
         }
     }
 
-    public void costumerMenu(Account account_id){
+    public void costumerMenu(int i){
         boolean running = true;
         System.out.println("Du er nu logget ind som: ");
-        System.out.println("Din saldo er: " + account.getCurrentAmount());
+        System.out.println("Din saldo er: " + dbc.returnCurrentAccountAmount(i));
         System.out.println("Tryk 1) for at indsætte penge ind på din konto");
         System.out.println("Tryk 2) for at trække penge ud af din konto");
         System.out.println("Eller tryk 'q' for at logge ud");
 
-        double deposit = 0;
         String cmd = sc.nextLine();
 
         while(running){
             if(cmd.equals("1")){
                 System.out.println("Hvor mange penge vil du gerne indsætte på din konto? ");
                 double input = Double.parseDouble(sc.nextLine());
-                th.deposit(account_id, input);
+                th.deposit(i, input);
                 System.out.println("Din nye er saldo er nu: " + account.getCurrentAmount());
             }
             if (cmd.equals("2")){
                 System.out.println("Indtast beløb du gerne vil hæve på din konto");
                 double input = Double.parseDouble(sc.nextLine());
-                th.withdraw(account_id,input);
+                th.withdraw(i,input);
             }
         }
     }
