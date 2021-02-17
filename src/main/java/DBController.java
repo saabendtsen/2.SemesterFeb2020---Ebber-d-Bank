@@ -58,6 +58,23 @@ public class DBController {
             ps.setInt(1, customer.getCustomer_id());
             ps.setString(2,customer.getName());
             ps.setString(3,customer.getCity());
+            createAccount(customer.getCustomer_id());
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 1) {
+                result = true;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean createAccount(int customerID){
+        boolean result = false;
+        String sql = "insert into bank.account (Account_ID, Customer_ID) values (?,?)";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+            ps.setInt(1, 0);
+            ps.setInt(2,customerID);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 1) {
                 result = true;
