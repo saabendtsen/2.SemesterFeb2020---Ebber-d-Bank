@@ -19,7 +19,7 @@ public class DBController {
                 int customer_id = rs.getInt("Customer_ID");
                 String customer_name = rs.getString("Customer_Name");
                 String customer_city = rs.getString("Customer_City");
-                text.append("Konto Id: ").append(account_id).append(" - Kunde Id: ").append(customer_id).append(" - Navn: ").append(customer_name).append(" - By: ").append(customer_city).append("\n");
+                text.append("Kunde Id: ").append(customer_id).append(" - Konto Id: ").append(account_id).append(" - Navn: ").append(customer_name).append(" - By: ").append(customer_city).append("\n");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
@@ -40,7 +40,7 @@ public class DBController {
                 int customerId = rs.getInt("Customer_ID");
                 int accountId = rs.getInt("Account_ID");
                 String customerName = rs.getString("Customer_Name");
-                text.append("Kunde nr: ").append(customerId).append(" Konto nr: ").append(accountId).append(" Kunde navn: ").append(customerName).append(" Saldo: ").append(returnCurrentAccountAmount(accountId)).append("\n");
+                text.append("Konto nr: ").append(accountId).append(" - Kunde nr: ").append(customerId).append(" - Kunde navn: ").append(customerName).append(" - Saldo: ").append(returnCurrentAccountAmount(accountId)).append("\n");
                 result = true;
             }
         } catch (SQLException throwables) {
