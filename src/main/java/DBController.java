@@ -50,12 +50,14 @@ public class DBController {
         return result;
     }
 
-    public boolean getAccountDetails(int accountID){
+    public boolean checkAccountToCustomer(int accountId, int customerId){
         boolean result = false;
-        String sql = "SELECT * FROM bank.account where Customer_ID=?";
+        String sql = "SELECT * FROM account WHERE (Account_id LIKE "+accountId+") AND (Customer_ID LIKE "+customerId+")";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
-            ps.setInt(1,accountID);
-            result = true;
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                result = true;
+            }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

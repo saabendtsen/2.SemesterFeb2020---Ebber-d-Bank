@@ -42,11 +42,12 @@ public class Menu {
         while (running) {
             if (cmd.equals("1")) {
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
-                int input = Integer.parseInt(sc.nextLine());
-                if (dbc.getAccountDetails(input)) {
+                int customerID = Integer.parseInt(sc.nextLine());
+                if (dbc.getCustomerAccountDetails(customerID)) {
                     System.out.println("indtast det konto nummer du gerne vil administrer");
-                    input = Integer.parseInt(sc.nextLine());
-                    costumerMenu(input);
+                    int accountId = Integer.parseInt(sc.nextLine());
+                    //checkAccountToCustomer //todo
+                    costumerMenu(accountId);
                     running = false;
                 }
             } else if (cmd.equals("2")) {
@@ -129,7 +130,7 @@ public class Menu {
                 dbc.getCustomersInfo();
                 System.out.println("Vælg et kunde id du gerne vil administrer");
                 int input = Integer.parseInt(sc.nextLine());
-                if (dbc.getAccountDetails(input)) {
+                if (dbc.getCustomerAccountDetails(input)) {
                     System.out.println("Vælg hvilket konto nummer du gerne vil administrer");
                     input = Integer.parseInt(sc.nextLine());
                     costumerMenuForAdmin(input);
@@ -143,14 +144,14 @@ public class Menu {
                 dbc.getCustomersInfo();
                 System.out.println("Vælg hvilket kunde id du gerne vil hæve fra");
                 int input = Integer.parseInt(sc.nextLine());
-                if (dbc.getAccountDetails(input)) {
+                if (dbc.getCustomerAccountDetails(input)) {
                     System.out.println("Vælg hvilket konto nr du gerne vil hæve fra");
                     fromAccountID = Integer.parseInt(sc.nextLine());
 
                     dbc.getCustomersInfo();
                     System.out.println("Vælg hvilket kunde id der skal modtage pengene");
                     input = Integer.parseInt(sc.nextLine());
-                    if (dbc.getAccountDetails(input)) {
+                    if (dbc.getCustomerAccountDetails(input)) {
                         System.out.println("Vælg hvilket konto nr der skal modtage pengene");
                         toAccountID = Integer.parseInt(sc.nextLine());
                         System.out.println("Vælg hvor meget du gerne vil overføre");
