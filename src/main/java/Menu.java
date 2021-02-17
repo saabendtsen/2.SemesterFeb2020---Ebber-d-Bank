@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Menu {
 
     Scanner sc = new Scanner(System.in);
-    Account account;
     TransaktionHandler th = new TransaktionHandler();
     Database database = new Database(Main.DBUSER,Main.DBPASS,Main.DBURL);
     DBController dbc = new DBController(database);
@@ -45,17 +44,17 @@ public class Menu {
             if(cmd.equals("1")){
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
                 int input = Integer.parseInt(sc.nextLine());
-                running = false;
                if(dbc.getAccountDetails(input)){
                    System.out.println("Hvilken konto vil du gerne administrer");
                    int input1 = Integer.parseInt(sc.nextLine());
                    costumerMenu(input1);
+                   running = false;
                }
             } else if(cmd.equals("2")){
                 running = false;
             } else {
-                System.out.println("Du har indtastet forkert prøv igen");
-                costumerLogInMenu();
+                System.out.println("Du har indtastet forkert prøv igen\n");
+                System.out.println("Indtast dit brugernavn og afslut med enter: ");
             }
         }
     }
@@ -122,6 +121,7 @@ public class Menu {
         System.out.println("Velkommen til Admin menu, hvad vil du foretage dig?");
         System.out.println("Tryk 1) for at administrere en kunde");
         System.out.println("Tryk 2) for at flytte midler mellem to kunder");
+        System.out.println("Tryk 3) for at oprette en ny kunde");
         System.out.println("Eller tryk 'q' for at lukke ud!");
 
         String cmd = sc.nextLine();
@@ -163,6 +163,8 @@ public class Menu {
                 }else {
                     System.out.println("Noget gik galt manner");
                 }
+            }else if (cmd.equals("3")) {
+                adduser();
             }else if (cmd.equals("q")){
                 running = false;
             }
@@ -175,11 +177,14 @@ public class Menu {
         String customer_name = sc.nextLine();
         System.out.println("indtast kundens by");
         String customer_city = sc.nextLine();
+        Customer newCustomer = new Customer(0,customer_name,customer_city);
         int result = dbc.createCustomer(customer_name,customer_city);
         if (result != 0){
             System.out.println("Kunde nr "+result+" er nu blevet tilføjet til DB");
+
         } else {
             System.out.println("Kunde kunne ikke tilføjes! Kunde ID "+" bruges allerede!");
         }
     }
+
 }
