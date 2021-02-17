@@ -61,6 +61,7 @@ public class Menu {
         System.out.println("Din saldo er: " + dbc.returnCurrentAccountAmount(i));
         System.out.println("Tryk 1) for at indsætte penge ind på din konto");
         System.out.println("Tryk 2) for at trække penge ud af din konto");
+        System.out.println("Tryk 3) for at gå tilbage til oversigten over dine konti");
         System.out.println("Eller tryk 'q' for at logge ud");
 
         String cmd = sc.nextLine();
@@ -70,12 +71,16 @@ public class Menu {
                 System.out.println("Hvor mange penge vil du gerne indsætte på din konto? ");
                 double input = Double.parseDouble(sc.nextLine());
                 th.deposit(i, input);
-                System.out.println("Din nye er saldo er nu: " + account.getCurrentAmount());
-            }
-            if (cmd.equals("2")){
+                System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
+            }else if (cmd.equals("2")){
                 System.out.println("Indtast beløb du gerne vil hæve på din konto");
                 double input = Double.parseDouble(sc.nextLine());
                 th.withdraw(i,input);
+            }else if (cmd.equals("3")){
+                running = false;
+            }
+            else if(cmd.equals("q")){
+                running = false;
             }
         }
     }
@@ -92,7 +97,6 @@ public class Menu {
             if(cmd.equals("1")){
                 System.out.println("Indtast dit brugernavn og afslut med enter: ");
                 cmd = sc.nextLine();
-                //Call the admins table
                 adminMenu();
             }else if(cmd.equals("2")) {
                 running = false;
@@ -114,11 +118,9 @@ public class Menu {
             if (cmd.equals("1")) {
                 dbc.getCustomersInfo();
                 System.out.println("Vælg en konto at administrere");
-                double input = Double.parseDouble(sc.nextLine());
-
-                //TODO hent account data fra DB
-                //costumerMenu(det valgte account);
-
+                int input = Integer.parseInt(sc.nextLine());
+                dbc.getAccountDetails(input);
+                costumerLogInMenu();
             }else if (cmd.equals("2")) {
                 dbc.getCustomersInfo();
                 System.out.println("hvilkent konto vil du hæve fra?");
