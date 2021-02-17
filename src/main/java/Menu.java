@@ -168,4 +168,18 @@ public class Menu {
             }
         }
     }
+
+    public void adduser(){
+        System.out.println("---Indsæt ny kunde---");
+        System.out.println("indtast kunder navn");
+        String customer_name = sc.nextLine();
+        System.out.println("indtast kundens by");
+        String customer_city = sc.nextLine();
+        int result = dbc.createCustomer(customer_name,customer_city);
+        if (result != 0){
+            System.out.println("Kunde nr "+result+" er nu blevet tilføjet til DB");
+        } else {
+            System.out.println("Kunde kunne ikke tilføjes! Kunde ID "+" bruges allerede!");
+        }
+    }
 }
