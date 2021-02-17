@@ -1,37 +1,36 @@
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class DBController {
-
-
     private final Database database;
-    private final LocalDateTime ldt = LocalDateTime.now();
-    String formattedTime = ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
     public DBController(Database database) {
         this.database = database;
     }
 
     public void getCustomersInfo (){
-        String sql = "SELECT * FROM bank.customers";
+        StringBuilder text = new StringBuilder();
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
+                "FROM customers\n" +
+                "INNER JOIN account ON account.Customer_ID=customers.Customer_ID";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
+                int account_id = rs.getInt("Account_ID");
                 int customer_id = rs.getInt("Customer_ID");
                 String customer_name = rs.getString("Customer_Name");
                 String customer_city = rs.getString("Customer_City");
-                System.out.println("Id: "+customer_id+ " Navn: "+customer_name+ " By: "+customer_city+"\n");
+                text.append("Konto Id: ").append(account_id).append(" - Kunde Id: ").append(customer_id).append(" - Navn: ").append(customer_name).append(" - By: ").append(customer_city).append("\n");
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        System.out.println(text);
     }
 
     public boolean getAccountDetails(int customerID){
         boolean result = false;
         StringBuilder text = new StringBuilder();
-        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name, customers.Customer_City\n" +
+        String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name\n" +
                 "FROM customers\n" +
                 "INNER JOIN account ON account.Customer_ID=customers.Customer_ID where customers.Customer_ID=?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
@@ -86,11 +85,27 @@ public class DBController {
         return result;
     }
 
-    public boolean deleteCustomer(int accountID) {
+    public boolean deleteCustomer(int customerID) {
         boolean result = false;
         String sql = "delete from bank.customers where Customer_ID = ?";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)){
-            ps.setInt(1, accountID);
+            ps.setInt(1, customerID);
+            int rowsAffected = ps.executeUpdate();
+            if (rowsAffected == 1) {
+                result = true;
+                deleteAllAccounts(customerID);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return result;
+    }
+
+    public boolean deleteAllAccounts(int customerID) {
+        boolean result = false;
+        String sql = "delete from bank.account where Customer_ID = ?";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+            ps.setInt(1, customerID);
             int rowsAffected = ps.executeUpdate();
             if (rowsAffected == 1) {
                 result = true;
@@ -155,9 +170,4 @@ public class DBController {
         }
         return amount;
     }
-
-    public void updateAccount(Account account){
-        /// TODO: 16-02-2021 : 18:00 mangler stadig at forstå hvad den skal gøre
-    }
-
 }

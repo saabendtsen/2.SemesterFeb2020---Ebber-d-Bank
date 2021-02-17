@@ -28,7 +28,7 @@ CREATE TABLE `account` (
   `Account_ID` int NOT NULL AUTO_INCREMENT,
   `Customer_ID` int NOT NULL,
   PRIMARY KEY (`Account_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `customers` (
   `Customer_Name` varchar(45) NOT NULL,
   `Customer_City` varchar(45) NOT NULL,
   PRIMARY KEY (`Customer_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,9 +57,9 @@ CREATE TABLE `transaction` (
   `Transaction_ID` int NOT NULL AUTO_INCREMENT,
   `Transaction_amount` double NOT NULL,
   `Transaction_date` datetime NOT NULL,
-  `Account_ID` varchar(45) NOT NULL,
+  `Account_ID` int NOT NULL,
   PRIMARY KEY (`Transaction_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -71,4 +71,4 @@ CREATE TABLE `transaction` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-02-17 11:45:31
+-- Dump completed on 2021-02-17 14:31:09
