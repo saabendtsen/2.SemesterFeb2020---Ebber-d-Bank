@@ -84,7 +84,7 @@ public class DBController {
         return result;
     }
 
-    public boolean depositFromAccount(Account account, double amount) {
+    public boolean depositFromAccount(int account_id, double amount) {
         boolean result = false;
         String sql = "insert into bank.transaction (Transaction_amount) values (?)";
         try (PreparedStatement ps = database.connect().prepareStatement(sql)) {
@@ -99,7 +99,7 @@ public class DBController {
         return result;
     }
 
-    public boolean withdrawFromAccount(Account account, double amount){
+    public boolean withdrawFromAccount(int account_id, double amount){
         /// TODO: 16-02-2021 18:00 mangler stadig
         boolean result = false;
         String sql = "insert into bank.transaction (Transaction_amount) values (?)";
