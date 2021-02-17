@@ -27,7 +27,7 @@ public class DBController {
         System.out.println(text);
     }
 
-    public boolean getAccountDetails(int customerID){
+    public boolean getCustomerAccountDetails(int customerID){
         boolean result = false;
         StringBuilder text = new StringBuilder();
         String sql = "SELECT customers.Customer_ID, account.Account_ID, customers.Customer_Name\n" +
@@ -47,6 +47,18 @@ public class DBController {
             throwables.printStackTrace();
         }
         System.out.println(text);
+        return result;
+    }
+
+    public boolean getAccountDetails(int accountID){
+        boolean result = false;
+        String sql = "SELECT * FROM bank.account where Customer_ID=?";
+        try (PreparedStatement ps = database.connect().prepareStatement(sql)){
+            ps.setInt(1,accountID);
+            result = true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         return result;
     }
 

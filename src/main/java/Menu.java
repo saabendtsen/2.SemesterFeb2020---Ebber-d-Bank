@@ -132,8 +132,8 @@ public class Menu {
                 if (dbc.getAccountDetails(input)) {
                     System.out.println("Vælg hvilket konto nummer du gerne vil administrer");
                     input = Integer.parseInt(sc.nextLine());
-                        costumerMenuForAdmin(input);
-                        running = false;
+                    costumerMenuForAdmin(input);
+                    running = false;
                 } else {
                     System.out.println("Hov hov du, tast lige rigtigt (adminMenu)");
                 }
@@ -233,5 +233,4 @@ public class Menu {
             running = false;
         }
     }
-
 }
