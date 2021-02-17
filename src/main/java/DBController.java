@@ -1,13 +1,7 @@
 import java.sql.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class DBController {
-
-
     private final Database database;
-    private final LocalDateTime ldt = LocalDateTime.now();
-    String formattedTime = ldt.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm:ss"));
 
     public DBController(Database database) {
         this.database = database;
@@ -155,9 +149,4 @@ public class DBController {
         }
         return amount;
     }
-
-    public void updateAccount(Account account){
-        /// TODO: 16-02-2021 : 18:00 mangler stadig at forstå hvad den skal gøre
-    }
-
 }
