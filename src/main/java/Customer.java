@@ -1,21 +1,21 @@
-public class Costumer {
+public class Customer {
 
-    private String costumer_id;
+    private int customer_id;
     private String name;
     private String city;
 
-    public Costumer(String costumer_id, String name, String city) {
-        costumer_id = costumer_id;
+    public Customer(int customer_id, String name, String city) {
+        this.customer_id = customer_id;
         this.name = name;
         this.city = city;
     }
 
-    public String getCostumer_id() {
-        return costumer_id;
+    public int getCustomer_id() {
+        return customer_id;
     }
 
-    public void setCostumer_id(String costumer_id) {
-        this.costumer_id = costumer_id;
+    public void setCustomer_id(int customer_id) {
+        this.customer_id = customer_id;
     }
 
     public String getName() {
