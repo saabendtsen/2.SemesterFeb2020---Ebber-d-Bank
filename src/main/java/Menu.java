@@ -181,7 +181,7 @@ public class Menu {
         int result = dbc.createCustomer(customer_name,customer_city);
         if (result != 0){
             System.out.println("Kunde nr "+result+" er nu blevet tilføjet til DB");
-
+            adminMenu();
         } else {
             System.out.println("Kunde kunne ikke tilføjes! Kunde ID "+" bruges allerede!");
         }
