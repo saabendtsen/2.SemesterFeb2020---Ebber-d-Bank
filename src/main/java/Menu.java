@@ -46,9 +46,12 @@ public class Menu {
                 if (dbc.getCustomerAccountDetails(customerID)) {
                     System.out.println("indtast det konto nummer du gerne vil administrer");
                     int accountId = Integer.parseInt(sc.nextLine());
-                    //checkAccountToCustomer //todo
-                    costumerMenu(accountId);
-                    running = false;
+                    if (dbc.checkAccountToCustomer(accountId,customerID)){
+                        costumerMenu(accountId);
+                        running = false;
+                    } else {
+                        System.out.println("Du mangler at indtaste et korrekt Id");
+                    }
                 }
             } else if (cmd.equals("2")) {
                 running = false;
@@ -129,12 +132,16 @@ public class Menu {
             if (cmd.equals("1")) {
                 dbc.getCustomersInfo();
                 System.out.println("Vælg et kunde id du gerne vil administrer");
-                int input = Integer.parseInt(sc.nextLine());
-                if (dbc.getCustomerAccountDetails(input)) {
+                int customerID = Integer.parseInt(sc.nextLine());
+                if (dbc.getCustomerAccountDetails(customerID)) {
                     System.out.println("Vælg hvilket konto nummer du gerne vil administrer");
-                    input = Integer.parseInt(sc.nextLine());
-                    costumerMenuForAdmin(input);
-                    running = false;
+                    int accountID = Integer.parseInt(sc.nextLine());
+                    if (dbc.checkAccountToCustomer(accountID,customerID)) {
+                        costumerMenuForAdmin(accountID);
+                        running = false;
+                    } else {
+                        System.out.println("Du mangler at indtaste et korrekt Id");
+                    }
                 } else {
                     System.out.println("Hov hov du, tast lige rigtigt (adminMenu)");
                 }
