@@ -28,7 +28,4 @@ public class TransaktionHandler {
             deposit(toAccount, amount);
     }
 
-    public void showAllTransactions(Account account){
-        dbc.showAllTransactions(account.getAccount_id());
-    }
 }

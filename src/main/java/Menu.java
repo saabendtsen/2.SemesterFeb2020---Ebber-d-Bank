@@ -68,6 +68,7 @@ public class Menu {
         System.out.println("Din saldo er: " + dbc.returnCurrentAccountAmount(i));
         System.out.println("Tryk 1) for at indsætte penge ind på din konto");
         System.out.println("Tryk 2) for at trække penge ud af din konto");
+        System.out.println("Tryk 3) for at se alle dine transaktioner");
         System.out.println("Eller tryk 'q' for at logge ud");
 
         String cmd = sc.nextLine();
@@ -85,7 +86,11 @@ public class Menu {
                 th.withdraw(i, input);
                 System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
                 costumerMenu(i);
-            } else if (cmd.equals("q")) {
+            } else if (cmd.equals("3")){
+                System.out.println(dbc.showAllTransactions(i));
+                costumerMenu(i);
+            }
+            else if (cmd.equals("q")) {
                 System.out.println("Du er nu logget ud!\n");
                 running = false;
             } else {
@@ -214,6 +219,7 @@ public class Menu {
         System.out.println("Din saldo er: " + dbc.returnCurrentAccountAmount(i));
         System.out.println("Tryk 1) for at indsætte penge ind på din konto");
         System.out.println("Tryk 2) for at trække penge ud af din konto");
+        System.out.println("Tryk 3) for at se alle dine transaktioner");
         System.out.println("Eller tryk 'q' for at logge ud");
 
         String cmd = sc.nextLine();
@@ -231,7 +237,11 @@ public class Menu {
                 th.withdraw(i, input);
                 System.out.println("Din nye er saldo er nu: " + dbc.returnCurrentAccountAmount(i));
                 costumerMenu(i);
-            } else if (cmd.equals("q")) {
+            } else if (cmd.equals("3")){
+                System.out.println(dbc.showAllTransactions(i));
+                costumerMenu(i);
+            }
+            else if (cmd.equals("q")) {
                 System.out.println("Du er nu logget ud!\n");
                 adminMenu();
                 running = false;
